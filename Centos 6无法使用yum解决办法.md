@@ -19,6 +19,8 @@ curl -o /etc/yum.repos.d/CentOS-Base.repo https://www.xmpan.com/Centos-6-Vault-A
 yum clean all
 yum makecache
 ```
+![image](https://github.com/Monster-hash/notebook/blob/picture/001.png)
+
 
 手动修复教程:
 
