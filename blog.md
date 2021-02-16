@@ -921,3 +921,16 @@ export default {
 </style>
 ```
 
+## 抽离composables
+
+把todo列表和添加todo的方法抽离成公共的composables函数
+
+FilteredTodos抽离成公共的composables函数
+
+TodoAdd中的事件触发逻辑抽离成组件特有的composables
+
+### 新建src/composables
+### 文件命名规则：use+action
+### 分类已有业务逻辑
+### 调用composable
+### 返回验证

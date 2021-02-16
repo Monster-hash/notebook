@@ -1,35 +1,47 @@
 <template>
-      <div class="input-add"> <!-- todo-app的输入框及按钮 -->
-      <input type="text" name="todo" v-model="todoContent" @keyup.enter="emitAddTodo" />
-      <!-- v-model同步用户输入内容 -->
-      <button  @click="emitAddTodo">
-        <i class="plus"></i> <!-- 仿照Font Awesome字体库的标记 -->
-      </button>
-      </div>
+  <div class="input-add">
+    <!-- todo-app的输入框及按钮 -->
+    <input
+      type="text"
+      name="todo"
+      v-model="todoContent"
+      @keyup.enter="emitAddTodo"
+    />
+    <!-- v-model同步用户输入内容 -->
+    <button @click="emitAddTodo">
+      <i class="plus"></i>
+      <!-- 仿照Font Awesome字体库的标记 -->
+    </button>
+  </div>
 </template>
 
 <script>
 import { ref } from "vue";
 export default {
-    name: "TodoApp",
-    setup(props, context){
-      const todoContent = ref("");
-      const emitAddTodo = () => {
-        const todo = {
-          id: props.tid,
-          content: todoContent.value,
-          completed: false,
-        };
-        context.emit("add-todo", todo);
-        todoContent.value = "";
-      };
-      return {
-        todoContent,
-        emitAddTodo,
-      };
-    }
-
+  name: "TodoApp",
+  props: ["tid"],
+  setup(props, context) {
+    return useEmitAddTodo(props.tid, context.emit);
+  },
+};
+// TodoAdd 组件专属 Composable
+function useEmitAddTodo(tid, emit) {
+  const todoContent = ref("");
+  const emitAddTodo = () => {
+    const todo = {
+      id: tid,
+      content: todoContent.value,
+      completed: false,
+    };
+    emit("add-todo", todo);
+    todoContent.value = "";
+  };
+  return {
+    todoContent,
+    emitAddTodo,
+  };
 }
+
 </script>
 
 <style>

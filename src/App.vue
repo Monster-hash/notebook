@@ -14,10 +14,11 @@
 </template>
 
 <script>
-import { computed,ref } from "vue";
 import TodoAdd from "./components/TodoAdd.vue";
 import TodoFilter from "./components/TodoFilter.vue";
 import TodoList from "./components/TodoList.vue";
+import useTodos from "@/composables/useTodos.js";
+import useFilteredTodos from "@/composables/useFilteredTodos.js";
 
 export default {
   name: "App",
@@ -25,22 +26,10 @@ export default {
   // 添加Todo
   // 创建一个数组保存Todo列表数据
   setup() {
-    const todos = ref([]);
-    // ref包装空数组作为默认todo列表数据
-    const addTodo = (todo) => todos.value.push(todo);
-    // 定义一个添加todo函数通过事件接收todo参数保存todo信息，追加到todo列表中
+    const { todos, addTodo } = useTodos();
+    const { filter, filteredTodos } = useFilteredTodos(todos);
 
-    const filter = ref("all");
-    const filteredTodos = computed(() => {
-      switch (filter.value) {
-        case "done":
-          return todos.value.filter((todo) => todo.completed);
-        case "todo":
-          return todos.value.filter((todo) => !todo.completed);
-        default:
-          return todos.value;
-      }
-    });
+    
 
     return {
       // 以对象形式返回
