@@ -934,3 +934,7 @@ TodoAdd中的事件触发逻辑抽离成组件特有的composables
 ### 分类已有业务逻辑
 ### 调用composable
 ### 返回验证
+
+## 假数据接口使用
+http://jsonplaceholder.typicode.com/  
+https://mockend.com/  
